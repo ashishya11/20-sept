@@ -41,6 +41,15 @@ require_once('../models/category_model.php');
 				header("location:../view/category-name.php?msg=!updated");
 			}
 		}
+		if ($_POST['submit'] == 'update_status') {
+			
+			$r = status_update($_POST);
+			if ($r) {
+				echo true;
+			}else{
+				echo false;
+			}
+		}
 	}else{
 		list_category();
 	}

@@ -24,7 +24,7 @@
 		</div>
 		<div class="row mt-3">
 			<div class="col-lg-2">
-				<div class="nav flex-column nav-pills bord" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+				<div class="nav flex-column nav-pills bord pos" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 					<p class="a"><img class="img-prop bord" src="../media/company-logo/eUgailly.jpg"></p>
 				    <a class="a nav-link <?php if(isset($homeActive)) echo 'active';?>" href="home.php" aria-selected="true">Home</a>
 				    <a class="a nav-link <?php if(isset($categoryActive)) echo 'active';?>" href="category-name.php" aria-selected="false">Category</a>

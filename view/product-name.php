@@ -2,6 +2,10 @@
 $productActive = 1;
 include "./header.php";
 ?>
+<script>
+	category_list();
+	sub_category_list();
+</script>
 <div class="col-lg-9">
 	<div class="row">
 		<div class="col-lg-12">
@@ -22,10 +26,29 @@ include "./header.php";
 					<div class="card-body">
 						<div class="form-group" action="#" onsubmit="return product_Name();">
 							<h4>Product_Name</h4>
-							<input type="text" name="category" class="form-control mb-2" id="category_Name" readonly="readonly" placeholder="Category_Name">
-							<input type="text" name="sub_category" class="form-control mb-2" id="sub_category_Name" readonly="readonly" placeholder="Sub_Category_Name">
+							<select class="form-control mb-2" id="category_list" name="category" onchange="funct(value)">
+							
+							</select>
+							<select class="form-control mb-2" id="sub_category_list" name="sub_category">
+							
+							</select>
 							<input type="text" name="product" class="form-control mb-2" id="product_Name" placeholder="Product_Name">
-							<input type="text" name="product" class="form-control desc" id="product_Desc" placeholder="Product_Description">
+							<div class="row">
+								<div class="col-lg-6">
+									<div class="text-center mt-1">
+										<img id="img1" src="../media/demo pic/no-image.png" class="avatar1 img-thumbnail" alt="avatar">
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="text-center mt-1">
+										<img id="img1" src="../media/demo pic/no-image.png" class="avatar1 img-thumbnail" alt="avatar">
+									</div>
+								</div>
+							</div>
+							<input type="file" name="product_img[]" class="border btn-sm mt-1 text-center center-block file-upload" id="product_img" multiple>
+							<input type="text" name="product" class="form-control desc mt-1" id="product_Desc" placeholder="Product_Description">
+							<input type="text" name="product_price" class="form-control mt-1" id="product_price" placeholder="Product_Price">
+							<input type="text" name="product_quantity" class="form-control mt-1" id="product_quantity" placeholder="Product_Quantity">
 							<input type="submit" name="submit" value="submit" class="mt-2 btn btn-primary" id="product_name_submit">
 						</div>
 					</div>

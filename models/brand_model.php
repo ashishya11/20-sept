@@ -106,6 +106,37 @@ include "../config/db.php";
 			echo false;
 		}
 	}
+	function status_update($data){
+		// echo "<pre>"; print_r($data);die;
+		global $conn;
+		$id = $data['id'];
+		$user_id = "2";
+		$status = $data['status'];
+		$time = date("Y-m-d H:i:s");
+		$check = true;
+		$uncheck = false;
+		if ($status != 0) {
+			$new_status = "0";
+			$stmt = "UPDATE brand SET status = '$new_status', modified_on = '$time', modified_by = '$user_id' WHERE id = '$id'";
+			$result = mysqli_query($conn,$stmt);
+			if(mysqli_affected_rows($conn)){
+				return $check;
+			}else{
+				return $uncheck;
+			}
+		} else {
+			$new_status = "1";
+			$stmt = "UPDATE brand SET status = '$new_status', modified_on = '$time', modified_by = '$user_id' WHERE id = '$id'";
+			$result = mysqli_query($conn,$stmt);
+			if(mysqli_affected_rows($conn)){
+				return $check;
+			}else{
+				return $uncheck;
+			}
+		}
+		
+		
+	}
 
 ?>
 

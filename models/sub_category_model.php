@@ -36,7 +36,7 @@ function list_sub_category(){
 	global $conn;
 	$user = array();
 	$delete_status = "0";
-	$stmt = "SELECT category.category_name, sub_category.sub_category_name, sub_category.id FROM category, sub_category WHERE category.id = sub_category.category_id";
+	$stmt = "SELECT category.category_name, sub_category.sub_category_name, sub_category.id, sub_category.status FROM category, sub_category WHERE category.id = sub_category.category_id";
 	$result = mysqli_query($conn,$stmt);
 	if (mysqli_num_rows($result)) {
 	 	while($row = mysqli_fetch_assoc($result)){
@@ -98,5 +98,34 @@ function delete($data){
 	}else{
 		return $uncheck;
 	}
+}
+function status_update($data){
+	// echo "<pre>"; print_r($data);die;
+	global $conn;
+	$id = $data['id'];
+	$user_id = "2";
+	$status = $data['status'];
+	$time = date("Y-m-d H:i:s");
+	$check = true;
+	$uncheck = false;
+	if ($status != 0) {
+		$new_status = "0";
+		$stmt = "UPDATE sub_category SET status = '$new_status', modified_on = '$time', modified_by = '$user_id' WHERE id = '$id'";
+		$result = mysqli_query($conn,$stmt);
+		if(mysqli_affected_rows($conn)){
+			return $check;
+		}else{
+			return $uncheck;
+		}
+	} else {
+		$new_status = "1";
+		$stmt = "UPDATE sub_category SET status = '$new_status', modified_on = '$time', modified_by = '$user_id' WHERE id = '$id'";
+		$result = mysqli_query($conn,$stmt);
+		if(mysqli_affected_rows($conn)){
+			return $check;
+		}else{
+			return $uncheck;
+		}
+	}		
 }
 ?>

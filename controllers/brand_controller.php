@@ -1,7 +1,6 @@
 <?php
 require_once('../models/brand_model.php');
 	
-
 	
 	if(isset($_POST) && !empty($_POST)){
 		if($_POST['submit'] == 'add'){
@@ -39,6 +38,16 @@ require_once('../models/brand_model.php');
 				header("location:../view/brand-name.php?msg=updated");
 			}else {
 				header("location:../view/brand-name.php?msg=!updated");
+			}
+		}
+
+		if ($_POST['submit'] == 'update_status') {
+			
+			$r = status_update($_POST);
+			if ($r) {
+				echo true;
+			}else{
+				echo false;
 			}
 		}
 	}else{

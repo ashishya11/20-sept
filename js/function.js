@@ -2,7 +2,7 @@ const DELETE = 'click here to delete'
 const EDIT = 'click here to edit'
 const STATUS = 'click here to change status'
 const PATH = '../media/brand-logo/'
-
+var list2 = [];
 $(document).ready(function(){
 	// $("#category_name_submit").click(function(){
 	// 	debugger;
@@ -63,7 +63,7 @@ var readURL = function(input) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            $('.avatar').attr('src', e.target.result);
+            $('.avatar,.avatar1').attr('src', e.target.result);
         }
         reader.readAsDataURL(input.files[0]);
     }
@@ -94,7 +94,7 @@ function login_check(){
 	}
 }
 function list_category(){
-	var res, counter, table;
+	var res, counter, table, status;
 	$.ajax({
 		url:"../controllers/category_controller.php",
 		method:"POST",
@@ -103,15 +103,21 @@ function list_category(){
 			counter = 0;
 			if (result != '') {
 				table = "<table style='width: -webkit-fill-available;'><tr>" +
-				"<th>S.No</th><th>Category_Name</th><th>Action</th></tr>";
+				"<th>S.No</th><th>Category_Name</th><th>Status</th><th>Action</th></tr>";
 				res = JSON.parse(result);
 				for (var i = 0; i < res.length; i++) {
 					debugger;
+					if (res[i].status != 0) {
+						status = "Active";
+					}else{
+						status = "In-Active";
+					}
 					table += "<tr><td>" + ++counter + "</td><td>" + res[i].category_name + 
+					"</td><td>" + status + 
 					"</td><td class='select'><span><i class='fas fa-pencil-alt action2'title='"+ EDIT +"'"  +
 					" onClick='edit_category("+res[i].id+")'></i></span>" +
 					"<span class='ml-left'><i class='fas fa-exclamation-circle action1'title='"+ STATUS +"'"  +
-					" onClick='status_category("+res[i].id+")'></i></span><span class='ml-left action'>" +
+					" onClick='status_category("+res[i].id+','+res[i].status+")'></i></span><span class='ml-left action'>" +
 					"<i class='fas fa-trash-alt' title='"+ DELETE +"' onClick='delete_category("+res[i].id+")'>" +
 					"</i></span></td></tr>";
 				}
@@ -204,9 +210,51 @@ function category_list(){
 		}
 	})
 }
+function sub_category_list(){
+	var res, counter, option;
+	var obj = {};
+	obj.submit = "check";
+	$.ajax({
+		url:"../controllers/product_controller.php",
+		method:"POST",
+		data:obj,
+		success:function(result){
+			debugger;
+			counter = 0;
+			if (result != '') {
+				list2 = JSON.parse(result);
+				option = "<select>";
+				for (var i = 0; i < list2.length; i++) {
+				option += "<option value="+list2[i].id+">" + list2[i].sub_category_name + "</option>";	
+				}
+				option += "</select>";
+				$("#sub_category_list").html(option);
+			}
+		}
+	})
+}
+function status_category(id,status){
+	debugger;
+	var id,status,obj;
+	id = id;
+	status = status;
+	obj = {};
+	obj.id = id;
+	obj.status = status;
+	obj.submit = "update_status";
+	$.ajax({
+		url:"../controllers/category_controller.php",
+		method:"POST",
+		data:obj,
+		success:function(result){
+			debugger;
+			list_category();
+		}
+	})
+}
 function list_sub_category(){
 	debugger;
-	var res, counter, table;
+	var res, counter, table, status;
 	var obj = {};
 	obj.submit = "list";
 	$.ajax({
@@ -218,16 +266,23 @@ function list_sub_category(){
 			counter = 0;
 			if (result != '') {
 				table = "<table style='width: -webkit-fill-available;'><tr>" +
-				"<th>S.No</th><th>Sub_Category_Name</th><th>Category_Name</th><th>Action</th></tr>";
+				"<th>S.No</th><th>Sub_Category_Name</th><th>Category_Name</th><th>Status</th><th>Action</th></tr>";
 				res = JSON.parse(result);
+				// list2.push(res);
 				for (var i = 0; i < res.length; i++) {
 					debugger;
+					if (res[i].status != 0) {
+						status = "Active";
+					}else{
+						status = "In-Active";
+					}
 					table += "<tr><td>" + ++counter + "</td><td>" + res[i].sub_category_name + 
 					"</td><td>" + res[i].category_name +
+					"</td><td>" + status +
 					"</td><td class='select'><span><i class='fas fa-pencil-alt action2' title='"+ EDIT +"'" +
 					" onClick='edit_sub_category("+res[i].id+")'></i></span>" +
 					"<span class='ml-left'><i class='fas fa-exclamation-circle action1' title='"+ STATUS +"'" +
-					" onClick='status_sub_category("+res[i].id+")'></i></span><span class='ml-left action'>" +
+					" onClick='status_sub_category("+res[i].id+','+res[i].status+")'></i></span><span class='ml-left action'>" +
 					"<i class='fas fa-trash-alt' title='"+ DELETE +"' " +
 					"onClick='delete_sub_category("+res[i].id+")'></i></span></td></tr>";
 				}
@@ -293,8 +348,27 @@ function delete_sub_category(id){
 		}
 	})
 }
+function status_sub_category(id,status){
+	debugger;
+	var id,status,obj;
+	id = id;
+	status = status;
+	obj = {};
+	obj.id = id;
+	obj.status = status;
+	obj.submit = "update_status";
+	$.ajax({
+		url:"../controllers/sub_category_controller.php",
+		method:"POST",
+		data:obj,
+		success:function(result){
+			debugger;
+			list_sub_category();
+		}
+	})
+}
 function list_brand(){
-	var res, counter, table;
+	var res, counter, table, status;
 	$.ajax({
 		url:"../controllers/brand_controller.php",
 		method:"POST",
@@ -303,16 +377,22 @@ function list_brand(){
 			counter = 0;
 			if (result != '') {
 				table = "<table style='width: -webkit-fill-available;'><tr>" +
-				"<th>S.No</th><th>Brand_Name</th><th>Brand_Logo</th><th>Action</th></tr>";
+				"<th>S.No</th><th>Brand_Name</th><th>Brand_Logo</th><th>Status</th><th>Action</th></tr>";
 				res = JSON.parse(result);
 				for (var i = 0; i < res.length; i++) {
+					if (res[i].status != 0) {
+						status = "Active";
+					}else{
+						status = "In-Active";
+					}
 					debugger;
 					table += "<tr><td>" + ++counter + "</td><td>" + res[i].brand_name + 
-					"</td><td><img class='img-cap' src='"+PATH+''+res[i].brand_img+"'></td><td class='select'>" +
+					"</td><td><img class='img-cap' src='"+PATH+''+res[i].brand_img+"'></td><td>"+ status +"</td>" +
+					"<td class='select'>" +
 					"<span><i class='fas fa-pencil-alt action2'title='"+ EDIT +"'"  +
 					" onClick='edit_brand("+res[i].id+")'></i></span>" +
 					"<span class='ml-left'><i class='fas fa-exclamation-circle action1'title='"+ STATUS +"'"  +
-					" onClick='status_brand("+res[i].id+")'></i></span><span class='ml-left action'>" +
+					" onClick='status_brand("+res[i].id+','+res[i].status+")'></i></span><span class='ml-left action'>" +
 					"<i class='fas fa-trash-alt' title='"+ DELETE +"' onClick='delete_brand("+res[i].id+")'>" +
 					"</i></span></td></tr>";
 				}
@@ -384,4 +464,27 @@ function edit_brand(id){
 			$("#brand_name_submit").addClass("hide");
 		}
 	})
+}
+function status_brand(id,status){
+	debugger;
+	var id,status,obj;
+	id = id;
+	status = status;
+	obj = {};
+	obj.id = id;
+	obj.status = status;
+	obj.submit = "update_status";
+	$.ajax({
+		url:"../controllers/brand_controller.php",
+		method:"POST",
+		data:obj,
+		success:function(result){
+			debugger;
+			list_brand();
+		}
+	})
+}
+function funct(value){
+	
+	console.log(list2);
 }

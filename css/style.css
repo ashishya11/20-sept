@@ -73,3 +73,18 @@ th ,td{
     padding: 5px;
     border-radius: 20px;
 }
+.inputWidth{
+	width: 275px;
+}
+.pos{
+	/*position: -webkit-sticky!important;*/
+    position: sticky!important;
+    top: 10px;
+}
+.avatar1 {
+    vertical-align: middle;
+    width: 150px;
+    height: 150px;
+    padding: 5px;
+    border-radius: 20px;
+}

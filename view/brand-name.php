@@ -10,9 +10,15 @@ list_brand();
 	<div class="row">
 		<div class="col-lg-12">
 			<input type="submit" name="submit" value="Add_New" class="btn btn-primary" id="add-brand">
-			<!-- <input type="submit" name="submit" value="Cancel" class="btn btn-primary" id="can-category"> -->
+			<input type="submit" name="submit" value="sort" class="btn btn-primary" id="sort-brand">
+			<!-- <div class="input-group mt-1 inputWidth">
+				<input name="searchField" class="form-control" type="text" id="searchField" placeholder="keyword">
+  				<div class="input-group-append">
+    				<input class="input-group-text" type="submit" name="submit" value="search">
+  				</div>
+			</div> -->
 			<hr>
-		</div>
+		</div>		
 		<div class="col-lg-12">
 			<h3 id="msg"></h3>
 		</div>

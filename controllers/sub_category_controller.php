@@ -41,6 +41,15 @@ if (isset($_POST) && !empty($_POST)) {
 			echo false;
 		}
 	}
+	if ($_POST['submit'] == 'update_status') {
+		// echo"<pre>";print_r($_POST);die;	
+		$r = status_update($_POST);
+		if ($r) {
+			echo true;
+		}else{
+			echo false;
+		}
+	}
 } else {
 	
 }

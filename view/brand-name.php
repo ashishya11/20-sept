@@ -29,7 +29,10 @@ list_brand();
 					<form class="form-group" action="../controllers/brand_controller.php" enctype="multipart/form-data" method="POST">
 						<h4>Brand_Name</h4>
 						<input type="text" name="brand" class="form-control" id="brand_Name" placeholder="brand_Name">
-						<input type="file" name="brand_img" class="border btn-sm mt-1" id="brand_img">
+						<div class="text-center mt-1">
+							<img id="img1" src="../media/demo pic/no-image.png" class="avatar img-thumbnail" alt="avatar">
+						</div>
+						<input type="file" name="brand_img" class="border btn-sm mt-1 text-center center-block file-upload" id="brand_img">
 						<input type="hidden" name="brand_Id" class="form-control" id="brand_Id">
 						<input type="submit" name="submit" value="add" class="mt-2 btn btn-primary" id="brand_name_submit">
 						<input type="submit" name="submit" value="update" class="mt-2 btn btn-primary hide" id="brand_name_update">

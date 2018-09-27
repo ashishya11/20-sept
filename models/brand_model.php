@@ -5,11 +5,15 @@ include "../config/db.php";
 		global $conn;
 		$check = true;
 		$uncheck = false;
-		echo "<pre>"; print_r($data);echo"<pre>";print_r($_FILES);die;
+		$temp = explode(".", $_FILES["brand_img"]["name"]);
+		$newfilename = round(microtime(true)) . '.' . end($temp);
+		$filetmpname = $_FILES['brand_img']['tmp_name'];
+		$folder = "../media/brand-logo/";
+		move_uploaded_file($filetmpname, $folder.$newfilename);
+		// echo"<pre>";print_r($filetmpname);echo"<pre>";print_r($_FILES);die;
 		$name = $data['brand'];
-		$img = $data['brand_img'];
 		$user_id = "1";
-		$stmt = "INSERT INTO brand (brand_name, brand_img, created_by) VALUES ('$name','$img','$user_id')";
+		$stmt = "INSERT INTO brand (brand_name, brand_img, created_by) VALUES ('$name','$newfilename','$user_id')";
 		$result = mysqli_query($conn,$stmt);
 		if(mysqli_affected_rows($conn)){
 			return $check;
@@ -18,7 +22,7 @@ include "../config/db.php";
 		}
 	}
 	function update($data){
-		// echo "<pre>"; print_r($data);die;
+		// echo "<pre>"; print_r($_FILES);die;
 		global $conn;
 		$check = true;
 		$uncheck = false;
@@ -26,13 +30,31 @@ include "../config/db.php";
 		$name = $data['brand'];
 		$user_id = "2";
 		$time = date("Y-m-d H:i:s");
-		$stmt = "UPDATE brand SET brand_name = '$name', modified_on = '$time', modified_by = '$user_id' WHERE id = '$id'";
-		$result = mysqli_query($conn,$stmt);
-		if(mysqli_affected_rows($conn)){
-			return $check;
-		}else{
-			return $uncheck;
+		if (isset($_FILES) && ($_FILES['brand_img']['error'] == 0)) {
+			// echo "in";die;
+			$temp = explode(".", $_FILES["brand_img"]["name"]);
+			$newfilename = round(microtime(true)) . '.' . end($temp);
+			$filetmpname = $_FILES['brand_img']['tmp_name'];
+			$folder = "../media/brand-logo/";
+			move_uploaded_file($filetmpname, $folder.$newfilename);
+			$stmt = "UPDATE brand SET brand_name = '$name', modified_on = '$time', modified_by = '$user_id', brand_img = '$newfilename' WHERE id = '$id'";
+			$result = mysqli_query($conn,$stmt);
+			if(mysqli_affected_rows($conn)){
+				return $check;
+			}else{
+				return $uncheck;
+			}
+		}else {
+			// echo "out";die;
+			$stmt = "UPDATE brand SET brand_name = '$name', modified_on = '$time', modified_by = '$user_id' WHERE id = '$id'";
+			$result = mysqli_query($conn,$stmt);
+			if(mysqli_affected_rows($conn)){
+				return $check;
+			}else{
+				return $uncheck;
+			}
 		}
+		
 	}
 	function delete($data){
 		// echo "<pre>"; print_r($data);die;
@@ -86,3 +108,10 @@ include "../config/db.php";
 	}
 
 ?>
+
+
+
+
+
+
+

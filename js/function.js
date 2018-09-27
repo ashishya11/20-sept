@@ -11,6 +11,9 @@ $(document).ready(function(){
 	// $("#login_submit").click(function(){
 	// 	debugger;
 	// })
+	$(".file-upload").on('change', function(){
+	    readURL(this);
+	})
 	$("#add-category").click(function(){
 		debugger;
 		$("#insert-category,#category_name_submit").removeClass("hide");
@@ -55,6 +58,16 @@ $(document).ready(function(){
 		$("#add-product").removeClass("hide");
 	})
 });
+var readURL = function(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('.avatar').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
 function category_Name(){
 	debugger;
 	var x = $("#category_Name").val();
@@ -349,7 +362,7 @@ function delete_brand(id){
 }
 function edit_brand(id){
 	debugger;
-	var name,id,img;
+	var name,id,img,img_path;
 	var obj = {};
 	obj.id = id;
 	obj.submit = "check";
@@ -362,10 +375,11 @@ function edit_brand(id){
 			var data = JSON.parse(result);
 			name = data[0].brand_name;
 			img = data[0].brand_img;
+			img_path = "../media/brand-logo/" + img;
 			id = data[0].id;
 			$("#insert-brand,#brand_name_update,#add-brand").removeClass("hide");
 			$("#brand_Name").val(name);
-			$("#brand_img").val().replace(/C:\\fakepath\\/i,img);
+			$("#img1").attr('src',img_path);
 			$("#brand_Id").val(id);
 			$("#brand_name_submit").addClass("hide");
 		}

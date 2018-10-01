@@ -488,3 +488,27 @@ function funct(value){
 	
 	console.log(list2);
 }
+function brand_list(){
+	debugger;
+	var res, counter, option;
+	var obj = {};
+	obj.submit = "check_brand";
+	$.ajax({
+		url:"../controllers/product_controller.php",
+		method:"POST",
+		data:obj,
+		success:function(result){
+			debugger;
+			counter = 0;
+			if (result != '') {
+				res = JSON.parse(result);
+				option = "<select>";
+				for (var i = 0; i < res.length; i++) {
+				option += "<option value="+res[i].id+">" + res[i].brand_name + "</option>";	
+				}
+				option += "</select>";
+				$("#brand_list").html(option);
+			}
+		}
+	})
+}

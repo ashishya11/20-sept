@@ -13,7 +13,7 @@ include "../config/db.php";
 		// echo"<pre>";print_r($filetmpname);echo"<pre>";print_r($_FILES);die;
 		$name = $data['brand'];
 		$user_id = "1";
-		$stmt = "INSERT INTO brand (brand_name, brand_img, created_by) VALUES ('$name','$newfilename','$user_id')";
+		$stmt = "INSERT INTO brand (brand_name, brand_img, created_by, modified_by) VALUES ('$name','$newfilename','$user_id','$user_id')";
 		$result = mysqli_query($conn,$stmt);
 		if(mysqli_affected_rows($conn)){
 			return $check;

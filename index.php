@@ -18,7 +18,7 @@ include "./config/db.php";
 		<div class="row mt-1">
 			<div class="col-lg-12">
 				<div class="card">
-					<img class="card-img" src="./media/color.jpg">
+					<img class="card-img" src="./media/company-logo/color.jpg">
 				</div>
 			</div>
 		</div>

@@ -5,6 +5,7 @@ include "./header.php";
 <script>
 	category_list();
 	sub_category_list();
+	brand_list();
 </script>
 <div class="col-lg-9">
 	<div class="row">
@@ -24,7 +25,7 @@ include "./header.php";
 		<div class="col-lg-4">
 			<div class="card hide" id="insert-product">
 					<div class="card-body">
-						<div class="form-group" action="#" onsubmit="return product_Name();">
+						<form class="form-group" action="../controllers/product_controller.php" method="POST" enctype="multipart/form-data">
 							<h4>Product_Name</h4>
 							<select class="form-control mb-2" id="category_list" name="category" onchange="funct(value)">
 							
@@ -32,8 +33,11 @@ include "./header.php";
 							<select class="form-control mb-2" id="sub_category_list" name="sub_category">
 							
 							</select>
-							<input type="text" name="product" class="form-control mb-2" id="product_Name" placeholder="Product_Name">
-							<div class="row">
+							<select class="form-control mb-2" id="brand_list" name="brand_list">
+							
+							</select>
+							<input type="text" name="product_name" class="form-control mb-2" id="product_Name" placeholder="Product_Name">
+							<!-- <div class="row">
 								<div class="col-lg-6">
 									<div class="text-center mt-1">
 										<img id="img1" src="../media/demo pic/no-image.png" class="avatar1 img-thumbnail" alt="avatar">
@@ -44,13 +48,13 @@ include "./header.php";
 										<img id="img1" src="../media/demo pic/no-image.png" class="avatar1 img-thumbnail" alt="avatar">
 									</div>
 								</div>
-							</div>
+							</div> -->
 							<input type="file" name="product_img[]" class="border btn-sm mt-1 text-center center-block file-upload" id="product_img" multiple>
-							<input type="text" name="product" class="form-control desc mt-1" id="product_Desc" placeholder="Product_Description">
 							<input type="text" name="product_price" class="form-control mt-1" id="product_price" placeholder="Product_Price">
 							<input type="text" name="product_quantity" class="form-control mt-1" id="product_quantity" placeholder="Product_Quantity">
-							<input type="submit" name="submit" value="submit" class="mt-2 btn btn-primary" id="product_name_submit">
-						</div>
+							<textarea type="text" name="product_desc" class="form-control desc mt-1" id="product_Desc" placeholder="Product_Description"></textarea>
+							<input type="submit" name="submit" value="save" class="mt-2 btn btn-primary" id="product_name_submit">
+						</form>
 					</div>
 					<!-- <input type="submit" name="submit" value="submit" class="mt-2 btn btn-primary" id="product_name_submit"> -->
 					<input type="submit" name="submit" value="Cancel" class="mt-2 btn btn-secondary" id="can-product">

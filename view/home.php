@@ -2,15 +2,12 @@
 $homeActive = 1;
 include "./header.php";
 ?>
-
 <div class="col-lg-8">
 	<div>
 		<div class="card">
 			<div class="card-body bg-secondary shadow-lg p-3">
-				<p class="card-text">Some text inside the first card</p>
-		        <p class="card-text">Some more text to increase the height</p>
-		        <p class="card-text">Some more text to increase the height</p>
-		        <p class="card-text">Some more text to increase the height</p>
+				<h1 id="clock"></h1>
+				<h2 id="time-part"></h2>
 			</div>			
 		</div>				
 	</div>

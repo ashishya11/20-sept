@@ -6,6 +6,7 @@ include "./header.php";
 	category_list();
 	sub_category_list();
 	brand_list();
+	product_list();
 </script>
 <div class="col-lg-9">
 	<div class="row">
@@ -16,11 +17,9 @@ include "./header.php";
 	</div>
 	<div class="row mt-2">
 		<div class="col-lg-8">
-			<!-- <div class="card">
-				<div class="card-body">
-					
-				</div>
-			</div> -->
+			<div id="list_product_table">
+				
+			</div>
 		</div>
 		<div class="col-lg-4">
 			<div class="card hide" id="insert-product">
@@ -53,7 +52,9 @@ include "./header.php";
 							<input type="text" name="product_price" class="form-control mt-1" id="product_price" placeholder="Product_Price">
 							<input type="text" name="product_quantity" class="form-control mt-1" id="product_quantity" placeholder="Product_Quantity">
 							<textarea type="text" name="product_desc" class="form-control desc mt-1" id="product_Desc" placeholder="Product_Description"></textarea>
+							<input type="hidden" name="product_Id" class="form-control" id="product_Id">
 							<input type="submit" name="submit" value="save" class="mt-2 btn btn-primary" id="product_name_submit">
+							<input type="submit" name="submit" value="update" class="mt-2 btn btn-primary hide" id="product_name_update">
 						</form>
 					</div>
 					<!-- <input type="submit" name="submit" value="submit" class="mt-2 btn btn-primary" id="product_name_submit"> -->

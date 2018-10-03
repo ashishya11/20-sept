@@ -40,7 +40,7 @@ list_brand();
 						</div>
 						<input type="file" name="brand_img" class="border btn-sm mt-1 text-center center-block file-upload" id="brand_img">
 						<input type="hidden" name="brand_Id" class="form-control" id="brand_Id">
-						<input type="submit" name="submit" value="add" class="mt-2 btn btn-primary" id="brand_name_submit">
+						<input type="submit" name="submit" value="submit" class="mt-2 btn btn-primary" id="brand_name_submit">
 						<input type="submit" name="submit" value="update" class="mt-2 btn btn-primary hide" id="brand_name_update">
 					</form>
 				</div>

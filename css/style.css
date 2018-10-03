@@ -37,9 +37,9 @@ a:hover{
 	/*background-image: url("../media/background.jpg");*/
 	height: -webkit-fill-available!important;
 }
-/*.hide{
+.hide{
 	display: none;
-}*/
+}
 .ml-left{
 	margin-left: 15px!important;
 }

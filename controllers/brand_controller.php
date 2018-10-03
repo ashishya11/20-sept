@@ -3,7 +3,7 @@ require_once('../models/brand_model.php');
 	
 	
 	if(isset($_POST) && !empty($_POST)){
-		if($_POST['submit'] == 'add'){
+		if($_POST['submit'] == 'submit'){
 			$r = save($_POST);
 			// echo"<pre>";print_r($_POST);print_r($_FILES);die;
 			if($r){
